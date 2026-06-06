@@ -1,0 +1,522 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>سورنا فناور سینا | سامانه پایش آلرژن و اسپور قارچ</title>
+    <meta name="description" content="طراحی و ساخت دستگاه‌های جمع‌آوری گرده، اسپور قارچ و آلرژن‌های هوا، خدمات نمونه‌گیری، تحلیل و تفسیر نتایج">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Vazirmatn', sans-serif; }
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+        body { background: #f4f7fb; overflow-x: hidden; }
+        .glass-card { background: rgba(255,255,255,0.9); backdrop-filter: blur(4px); }
+        .counter-number { font-size: 3rem; font-weight: 800; line-height: 1; }
+        .gradient-bg { background: linear-gradient(135deg, #0f2b4d, #1e3a5f); }
+        .text-gradient { background: linear-gradient(90deg, #38bdf8, #2563eb); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.2); }
+        .gallery-img { object-fit: cover; height: 180px; width: 100%; border-radius: 1rem; cursor: pointer; transition: 0.2s; }
+        .gallery-img:hover { transform: scale(1.02); }
+        .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; }
+        .section-subtitle { color: #475569; max-width: 800px; margin: auto; line-height: 1.8; }
+        .dark-stat { background: #1e293b; color: #f1f5f9; border-radius: 1.5rem; padding: 1.5rem; text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2); }
+        .fa, .fas, .far { margin-left: 0.5rem; }
+        .lang-switch-btn { transition: all 0.2s; cursor: pointer; padding: 6px 12px; border-radius: 9999px; background: #e2e8f0; font-weight: 600; }
+        .lang-active { background: #2563eb; color: white; }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white shadow-md py-3">
+    <div class="container mx-auto px-4 flex items-center justify-between flex-wrap gap-4">
+        <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=200" class="w-12 h-12 rounded-full object-cover" alt="لوگو">
+            <div>
+                <h1 class="font-black text-xl text-slate-800">سورنا فناور سینا</h1>
+                <p class="text-xs text-slate-500" id="subtitleText">Aerobiology & Air Monitoring</p>
+            </div>
+        </div>
+        <nav class="hidden lg:flex gap-6 font-semibold text-slate-700">
+            <a href="#products" id="navProducts" class="hover:text-blue-600 transition">محصولات</a>
+            <a href="#services" id="navServices" class="hover:text-blue-600 transition">خدمات</a>
+            <a href="#dashboard" id="navDashboard" class="hover:text-blue-600 transition">پایش آنلاین</a>
+            <a href="#news" id="navNews" class="hover:text-blue-600 transition">اخبار</a>
+            <a href="#faq" id="navFaq" class="hover:text-blue-600 transition">سوالات متداول</a>
+            <a href="#contact" id="navContact" class="hover:text-blue-600 transition">تماس</a>
+        </nav>
+        <div class="flex items-center gap-3">
+            <div class="flex gap-2">
+                <button id="langFaBtn" class="lang-switch-btn lang-active">فا</button>
+                <button id="langEnBtn" class="lang-switch-btn">EN</button>
+            </div>
+            <button id="consultBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl font-semibold shadow" data-i18n="consultBtn">درخواست مشاوره</button>
+            <button id="mobileMenuBtn" class="lg:hidden text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+    </div>
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-t py-3 px-4 flex flex-col gap-3 shadow-lg">
+        <a href="#products" data-i18n="navProducts">محصولات</a>
+        <a href="#services" data-i18n="navServices">خدمات</a>
+        <a href="#dashboard" data-i18n="navDashboard">پایش آنلاین</a>
+        <a href="#news" data-i18n="navNews">اخبار</a>
+        <a href="#faq" data-i18n="navFaq">سوالات متداول</a>
+        <a href="#contact" data-i18n="navContact">تماس</a>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="relative min-h-[85vh] flex items-center justify-center bg-gradient-to-r from-slate-900 to-slate-800 text-white">
+    <div class="absolute inset-0 bg-black/50 z-0"></div>
+    <div class="container mx-auto px-4 relative z-10 text-center">
+        <div class="max-w-4xl mx-auto bg-white/10 backdrop-blur-md rounded-3xl p-8 md:p-12">
+            <h2 class="text-4xl md:text-6xl font-black leading-tight mb-6" id="heroTitle">سامانه هوشمند پایش <span class="text-gradient">اسپور قارچ و آلرژن هوا</span></h2>
+            <p class="text-lg md:text-xl leading-loose mb-8" id="heroDesc">طراحی و ساخت تجهیزات پیشرفته نمونه‌گیری گرده، اسپور قارچ، آلرژن‌های معلق و پایش کیفیت هوا برای بیمارستان‌ها، آزمایشگاه‌ها، مراکز تحقیقاتی و کشاورزی دقیق</p>
+            <div class="flex flex-wrap justify-center gap-5">
+                <a href="#products" class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-2xl font-bold" data-i18n="heroBtn1">مشاهده محصولات</a>
+                <a href="#services" class="bg-white/20 hover:bg-white/30 border border-white/40 px-8 py-3 rounded-2xl" data-i18n="heroBtn2">خدمات تخصصی</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- آمار پایش هوا (stats) -->
+<section class="py-20 gradient-bg text-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12"><h2 class="text-3xl font-bold" id="statsTitle">داده‌های پایش هوا</h2><p class="text-blue-200 mt-2" id="statsSub">نمونه‌ای از داده‌های واقعی ثبت شده توسط سامانه</p></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="dark-stat bg-slate-800/80"><div class="counter-number text-cyan-300" data-target="245">0</div><div class="mt-2 text-lg" id="stat1Label">اسپور قارچ / متر مکعب</div></div>
+            <div class="dark-stat bg-slate-800/80"><div class="counter-number text-green-300" data-target="178">0</div><div class="mt-2 text-lg" id="stat2Label">گرده گیاهان</div></div>
+            <div class="dark-stat bg-slate-800/80"><div class="counter-number text-yellow-300" data-target="96">0</div><div class="mt-2 text-lg" id="stat3Label">دقت نمونه‌گیری %</div></div>
+            <div class="dark-stat bg-slate-800/80"><div class="counter-number text-red-300" data-target="24">0</div><div class="mt-2 text-lg" id="stat4Label">ساعت پایش پیوسته</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- محصولات -->
+<section id="products" class="py-20">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12"><h2 class="section-title" id="productsTitle">محصولات تخصصی</h2><p class="section-subtitle" id="productsSub">طراحی شده بر اساس فناوری مشابه Burkard و Zefon با قابلیت بومی‌سازی</p></div>
+        <div id="productsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+</section>
+
+<!-- خدمات -->
+<section id="services" class="py-20 bg-slate-100">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12"><h2 class="section-title" id="servicesTitle">خدمات تخصصی</h2><p class="section-subtitle" id="servicesSub">ارائه خدمات نمونه‌گیری، تحلیل و تفسیر داده‌های آلرژن و اسپور قارچ</p></div>
+        <div id="servicesList" class="grid grid-cols-1 md:grid-cols-4 gap-6"></div>
+    </div>
+</section>
+
+<!-- داشبورد آنلاین -->
+<section id="dashboard" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div><h2 class="text-3xl font-bold mb-4" id="dashboardTitle">داشبورد آنلاین پایش</h2><p class="text-slate-600 leading-loose mb-6" id="dashboardDesc">داده‌های ثبت شده توسط دستگاه‌ها به صورت آنلاین روی پلتفرم ابری ذخیره شده و امکان تحلیل، رسم نمودار، هشدار آلودگی و گزارش‌گیری فراهم است.</p><div class="space-y-3"><div><i class="fas fa-cloud text-blue-500"></i> <span id="dashboardFeature1">ذخیره‌سازی ابری</span></div><div><i class="fas fa-chart-line text-green-500"></i> <span id="dashboardFeature2">تحلیل روند آلودگی</span></div><div><i class="fas fa-bell text-yellow-500"></i> <span id="dashboardFeature3">هشدار افزایش آلرژن</span></div></div></div>
+            <div><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1400" class="rounded-2xl shadow-xl" alt="Dashboard"></div>
+        </div>
+    </div>
+</section>
+
+<!-- اخبار (dynamic with translations) -->
+<section id="news" class="py-20 bg-slate-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12"><h2 class="section-title" id="newsTitle">اخبار و رسانه</h2><p class="section-subtitle" id="newsSub">رویدادها و موفقیت‌های شرکت سورنا فناور سینا</p></div>
+        <div id="newsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+    </div>
+</section>
+
+<!-- مقایسه فنی -->
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12"><h2 class="section-title" id="compareTitle">مقایسه فنی</h2></div>
+        <div class="overflow-x-auto rounded-2xl shadow">
+            <table class="w-full border-collapse" id="compareTable">
+                <thead class="bg-blue-700 text-white"><tr><th class="p-4" id="compareFeature">ویژگی</th><th class="p-4" id="compareOur">سورنا فناور</th><th class="p-4">Burkard</th><th class="p-4">Zefon</th></tr></thead>
+                <tbody class="text-center bg-white">
+                    <tr class="border-b"><td class="p-4 font-bold" id="compareRow1">نمونه‌گیری</td><td class="p-4" id="compareOur1">۷ روزه + آنلاین</td><td class="p-4">۷ روزه</td><td class="p-4">لحظه‌ای</td></tr>
+                    <tr class="border-b"><td class="p-4 font-bold" id="compareRow2">تحلیل دیجیتال</td><td class="p-4" id="compareOur2">دارد</td><td class="p-4">ندارد</td><td class="p-4">ندارد</td></tr>
+                    <tr class="border-b"><td class="p-4 font-bold" id="compareRow3">Cloud Platform</td><td class="p-4" id="compareOur3">دارد</td><td class="p-4">ندارد</td><td class="p-4">ندارد</td></tr>
+                    <tr><td class="p-4 font-bold" id="compareRow4">خدمات تحلیل</td><td class="p-4" id="compareOur4">کامل</td><td class="p-4">محدود</td><td class="p-4">محدود</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-20 bg-slate-50">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <div class="text-center mb-12"><h2 class="section-title" id="faqTitle">سوالات متداول</h2></div>
+        <div id="faqContainer" class="space-y-5"></div>
+    </div>
+</section>
+
+<!-- تماس با ما -->
+<section id="contact" class="py-20 bg-slate-900 text-white">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12">
+            <div><h2 class="text-3xl font-bold mb-5" id="contactTitle">تماس با ما</h2><p class="text-slate-300 mb-6" id="contactDesc">برای مشاوره، ثبت سفارش یا همکاری با ما تماس بگیرید.</p><div class="space-y-4"><div><i class="fas fa-phone text-blue-400 ml-2"></i> 09132299368</div><div><i class="fas fa-envelope text-blue-400 ml-2"></i>sornafanavarsina@gmail.com</div><div><i class="fas fa-map-marker-alt text-blue-400 ml-2"></i><span id="contactAddress">اهواز، دانشگاه شهید چمران اهواز، مرکز رشد واحدهای فناور</span></div></div></div>
+            <div><form id="contactForm" class="bg-slate-800 p-8 rounded-2xl"><div class="mb-4"><label class="block mb-1" id="contactNameLabel">نام کامل</label><input type="text" id="cname" class="w-full p-3 rounded-lg bg-slate-700 border-0" required></div><div class="mb-4"><label class="block mb-1" id="contactEmailLabel">ایمیل</label><input type="email" id="cemail" class="w-full p-3 rounded-lg bg-slate-700" required></div><div class="mb-4"><label class="block mb-1" id="contactTypeLabel">نوع درخواست</label><select id="ctype" class="w-full p-3 rounded-lg bg-slate-700"><option id="optPurchase" value="خرید دستگاه">خرید دستگاه</option><option id="optSampling" value="نمونه‌گیری هوا">نمونه‌گیری هوا</option><option id="optAnalysis" value="تحلیل داده">تحلیل داده</option><option id="optResearch" value="همکاری پژوهشی">همکاری پژوهشی</option></select></div><div class="mb-4"><label class="block mb-1" id="contactMsgLabel">پیام</label><textarea id="cmsg" rows="4" class="w-full p-3 rounded-lg bg-slate-700"></textarea></div><button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-xl font-bold" id="contactSubmitBtn">ارسال درخواست</button></form></div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-slate-950 text-slate-400 py-8 text-center">
+    <div class="container mx-auto px-4"><div class="text-2xl font-bold text-white mb-3">سورنا فناور سینا</div><p class="max-w-2xl mx-auto mb-6" id="footerDesc">توسعه فناوری‌های نوین پایش آلرژن، اسپور قارچ و آئروبیولوژی</p><div class="flex justify-center gap-5 text-xl mb-4"><a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a><a href="#" class="hover:text-white"><i class="fab fa-linkedin"></i></a><a href="#" class="hover:text-white"><i class="fab fa-youtube"></i></a></div><div class="border-t border-slate-800 pt-4 text-sm" id="copyright">© 2026 سورنا فناور سینا - تمام حقوق محفوظ است</div></div>
+</footer>
+
+<script>
+    // ==================== MULTILINGUAL DATA ====================
+    let currentLang = 'fa'; // 'fa' or 'en'
+
+    // Products bilingual data (same images and price)
+    const productsData = {
+        fa: [
+            { id:1, title:"دستگاه نمونه‌گیر خودکار آلاینده‌های بیولوژیک هوا", description:"دستگاه حجمی ۷ روزه با قابلیت پایش مداوم اسپور قارچ و گرده گیاهان، مجهز به کنترل جریان هوا، نمایشگر LCD و اتصال به سامانه ابری. شکست انحصار Burkard.", price:"۷۲۰ میلیون تومان", features:["پایش ۷ روزه","اتصال ابری","دقت حجمی بالا","قابل استفاده در ایستگاه‌های پایش"], images:["https://picsum.photos/id/101/400/300","https://picsum.photos/id/102/400/300","https://picsum.photos/id/103/400/300","https://picsum.photos/id/104/400/300","https://picsum.photos/id/106/400/300"] },
+            { id:2, title:"نمونه‌گیر هوای اماکن (Indoor Air Sampler)", description:"مناسب بیمارستان‌ها، مدارس، صنایع غذایی و دفاتر. جمع‌آوری ذرات آلرژن و قارچ با کارتریج Air-O-Cell.", price:"۳۹۰ میلیون تومان", features:["سبک و پرتابل","نمونه‌گیری سریع","قابل استفاده با کارتریج استاندارد"], images:["https://picsum.photos/id/20/400/300","https://picsum.photos/id/21/400/300","https://picsum.photos/id/22/400/300","https://picsum.photos/id/23/400/300","https://picsum.photos/id/24/400/300"] },
+            { id:3, title:"دستگاه اسپورتراپ دیجیتال (Spore Trap Pro)", description:"نمونه‌گیر دوکاره با قابلیت تنظیم دوره نمونه‌گیری ۱ تا ۱۴ روز، دارای حافظه داخلی و خروجی USB.", price:"۵۹۰ میلیون تومان", features:["تنظیم بازه زمانی","حافظه ۱۰۰ نمونه","باطری اضطراری"], images:["https://picsum.photos/id/29/400/300","https://picsum.photos/id/30/400/300","https://picsum.photos/id/31/400/300","https://picsum.photos/id/32/400/300","https://picsum.photos/id/33/400/300"] },
+            { id:4, title:"دستگاه پایش هوای آلرژن مدل SFS-5000", description:"پیشرفته‌ترین نمونه‌گیر هوای دیجیتال با نمایشگر لمسی، قابلیت کالیبراسیون خودکار و اتصال به اینترنت.", price:"۸۲۰ میلیون تومان", features:["اتصال اینترنت","گارانتی ۳ ساله","نمایشگر لمسی","خروجی آنلاین"], images:["https://picsum.photos/id/41/400/300","https://picsum.photos/id/42/400/300","https://picsum.photos/id/43/400/300","https://picsum.photos/id/44/400/300","https://picsum.photos/id/45/400/300"] },
+            { id:5, title:"تله حجمی اسپور ۷ روزه (مدل SFS-7000)", description:"نسخه حرفه‌ای مشابه Burkard با قابلیت آنالیز آنلاین و سامانه هشدار. ساخت ایران.", price:"۷۵۰ میلیون تومان", features:["پایش ۷ روزه","داده آنلاین","نرم‌افزار اختصاصی","هشدار آلودگی"], images:["https://picsum.photos/id/11/400/300","https://picsum.photos/id/12/400/300","https://picsum.photos/id/13/400/300","https://picsum.photos/id/14/400/300","https://picsum.photos/id/15/400/300"] }
+        ],
+        en: [
+            { id:1, title:"Automatic Bioaerosol Sampler", description:"7-day volumetric sampler for continuous monitoring of fungal spores and pollen, equipped with airflow control, LCD display, and cloud connectivity.", price:"720 Million IRR", features:["7-day monitoring","Cloud connectivity","High volumetric accuracy","Suitable for monitoring stations"], images:["https://picsum.photos/id/101/400/300","https://picsum.photos/id/102/400/300","https://picsum.photos/id/103/400/300","https://picsum.photos/id/104/400/300","https://picsum.photos/id/106/400/300"] },
+            { id:2, title:"Indoor Air Sampler", description:"Ideal for hospitals, schools, food industry, offices. Collects allergen and fungal particles with Air-O-Cell cartridges.", price:"390 Million IRR", features:["Lightweight & portable","Fast sampling","Compatible with standard cartridges"], images:["https://picsum.photos/id/20/400/300","https://picsum.photos/id/21/400/300","https://picsum.photos/id/22/400/300","https://picsum.photos/id/23/400/300","https://picsum.photos/id/24/400/300"] },
+            { id:3, title:"Digital Spore Trap Pro", description:"Dual-mode sampler with adjustable sampling period (1 to 14 days), internal memory, and USB output.", price:"590 Million IRR", features:["Adjustable time range","100 sample memory","Backup battery"], images:["https://picsum.photos/id/29/400/300","https://picsum.photos/id/30/400/300","https://picsum.photos/id/31/400/300","https://picsum.photos/id/32/400/300","https://picsum.photos/id/33/400/300"] },
+            { id:4, title:"Allergen Air Monitor SFS-5000", description:"Advanced digital air sampler with touchscreen, auto-calibration, and internet connectivity.", price:"820 Million IRR", features:["Internet connectivity","3-year warranty","Touchscreen display","Online output"], images:["https://picsum.photos/id/41/400/300","https://picsum.photos/id/42/400/300","https://picsum.photos/id/43/400/300","https://picsum.photos/id/44/400/300","https://picsum.photos/id/45/400/300"] },
+            { id:5, title:"7-Day Volumetric Spore Trap (SFS-7000)", description:"Professional model similar to Burkard with online analysis and alert system. Made in Iran.", price:"750 Million IRR", features:["7-day monitoring","Online data","Proprietary software","Contamination alerts"], images:["https://picsum.photos/id/11/400/300","https://picsum.photos/id/12/400/300","https://picsum.photos/id/13/400/300","https://picsum.photos/id/14/400/300","https://picsum.photos/id/15/400/300"] }
+        ]
+    };
+
+    // Services bilingual
+    const servicesData = {
+        fa: [
+            { title:"نمونه‌گیری هوا", desc:"اعزام تیم به محل برای نمونه‌گیری آلرژن‌ها", icon:"fas fa-wind", type:"sampling" },
+            { title:"تحلیل میکروسکوپی", desc:"شناسایی گرده و اسپور قارچ", icon:"fas fa-microscope", type:"analysis" },
+            { title:"تحلیل داده", desc:"مدل‌سازی و گزارش تخصصی", icon:"fas fa-chart-line", type:"analysis" },
+            { title:"کشاورزی دقیق", desc:"مدیریت بیماری‌های گیاهی", icon:"fas fa-leaf", type:"sampling" }
+        ],
+        en: [
+            { title:"Air Sampling", desc:"On-site team dispatch for allergen sampling", icon:"fas fa-wind", type:"sampling" },
+            { title:"Microscopic Analysis", desc:"Pollen and fungal spore identification", icon:"fas fa-microscope", type:"analysis" },
+            { title:"Data Analysis", desc:"Modeling & expert reporting", icon:"fas fa-chart-line", type:"analysis" },
+            { title:"Precision Agriculture", desc:"Plant disease management", icon:"fas fa-leaf", type:"sampling" }
+        ]
+    };
+
+    // News bilingual (3 items)
+    const newsData = {
+        fa: [
+            { img:"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200", badge:"دولت", title:"رونمایی از دستگاه خودکار نمونه‌گیری آلاینده‌های بیولوژیک هوا", desc:"با حضور مسئولین وزارت علوم و جهاد کشاورزی، دستگاه بومی نمونه‌گیر اسپور قارچ رونمایی شد.", link:"https://dolat.ir/detail/437746" },
+            { img:"https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1200", badge:"دانشگاه کشاورزی", title:"حضور استاد دانشگاه در نوزدهمین فراخوان ثبت اختراعات", desc:"دستگاه نمونه‌گیر خودکار آلاینده‌های بیولوژیک هوا در جمع دستاوردهای برتر کشاورزی قرار گرفت.", link:"https://agri.scu.ac.ir/fa/w/%D8%AF%D9%88-%D8%AA%D9%86-%D8%A7%D8%B2-%D8%A7%D8%B3%D8%AA%D8%A7%D8%AF%D8%A7%D9%86-%D8%AF%D8%A7%D9%86%D8%B4%DA%A9%D8%AF%D9%87-%DA%A9%D8%B4%D8%A7%D9%88%D8%B1%D8%B2%DB%8C-%D8%AF%D8%B1-%D9%86%D9%88%D8%B2%D8%AF%D9%87%D9%85%DB%8C%D9%86-%D9%81%D8%B1%D8%A7%D8%AE" },
+            { img:"https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1200", badge:"پژوهشگاه", title:"بیست و پنجمین نمایشگاه پژوهش و فناوری", desc:"ارائه آخرین نسخه دستگاه نمونه‌گیر هوای اماکن با قابلیت اتصال ابری در نمایشگاه پژوهش.", link:"https://agri.scu.ac.ir/fa/w/%D8%AD%D8%B6%D9%88%D8%B1-%DB%8C%DA%A9%DB%8C-%D8%A7%D8%B2-%D8%A7%D8%B3%D8%AA%D8%A7%D8%AF%D8%A7%D9%86-%D8%AF%D8%A7%D9%86%D8%B4%DA%A9%D8%AF%D9%87-%DA%A9%D8%B4%D8%A7%D9%88%D8%B1%D8%B2%DB%8C-%D8%AF%D8%B1-%D8%A8%DB%8C%D8%B3%D8%AA%E2%80%8C%D9%88%D9%BE%D9%86" }
+        ],
+        en: [
+            { img:"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200", badge:"Government", title:"Launch of Automatic Bioaerosol Sampler", desc:"With officials from Ministry of Science and Agriculture, the domestic fungal spore sampler was unveiled.", link:"https://dolat.ir/detail/437746" },
+            { img:"https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1200", badge:"Agricultural University", title:"University Professor at 19th Patent Call", desc:"Automatic bioaerosol sampler recognized among top agricultural achievements.", link:"https://agri.scu.ac.ir/fa/w/%D8%AF%D9%88-%D8%AA%D9%86-%D8%A7%D8%B2-%D8%A7%D8%B3%D8%AA%D8%A7%D8%AF%D8%A7%D9%86-%D8%AF%D8%A7%D9%86%D8%B4%DA%A9%D8%AF%D9%87-%DA%A9%D8%B4%D8%A7%D9%88%D8%B1%D8%B2%DB%8C-%D8%AF%D8%B1-%D9%86%D9%88%D8%B2%D8%AF%D9%87%D9%85%DB%8C%D9%86-%D9%81%D8%B1%D8%A7%D8%AE" },
+            { img:"https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1200", badge:"Research Institute", title:"25th Research & Technology Exhibition", desc:"Latest indoor air sampler with cloud connectivity presented at the exhibition.", link:"https://agri.scu.ac.ir/fa/w/%D8%AD%D8%B6%D9%88%D8%B1-%DB%8C%DA%A9%DB%8C-%D8%A7%D8%B2-%D8%A7%D8%B3%D8%AA%D8%A7%D8%AF%D8%A7%D9%86-%D8%AF%D8%A7%D9%86%D8%B4%DA%A9%D8%AF%D9%87-%DA%A9%D8%B4%D8%A7%D9%88%D8%B1%D8%B2%DB%8C-%D8%AF%D8%B1-%D8%A8%DB%8C%D8%B3%D8%AA%E2%80%8C%D9%88%D9%BE%D9%86" }
+        ]
+    };
+
+    // FAQ bilingual
+    const faqData = {
+        fa: [
+            { q:"تفاوت سیستم حجمی با Air-O-Cell چیست؟", a:"سیستم حجمی امکان نمونه‌گیری مداوم و کمی‌سازی دقیق را فراهم می‌کند، در حالی که Air-O-Cell بیشتر برای تست سریع محیط‌های داخلی کاربرد دارد." },
+            { q:"آیا دستگاه‌ها قابلیت اتصال آنلاین دارند؟", a:"بله، مدل‌های جدید دارای انتقال داده، ذخیره‌سازی ابری و داشبورد تحت وب هستند." },
+            { q:"آیا خدمات نمونه‌گیری در محل انجام می‌شود؟", a:"بله، تیم تخصصی نمونه‌گیری برای بیمارستان‌ها، صنایع غذایی، گلخانه‌ها و ساختمان‌ها اعزام می‌شود." }
+        ],
+        en: [
+            { q:"Difference between volumetric system and Air-O-Cell?", a:"Volumetric system enables continuous sampling and precise quantification, while Air-O-Cell is more suitable for rapid indoor testing." },
+            { q:"Do devices support online connectivity?", a:"Yes, new models feature data transmission, cloud storage, and web dashboard." },
+            { q:"Is on-site sampling service available?", a:"Yes, our specialized team provides sampling for hospitals, food industries, greenhouses, and buildings." }
+        ]
+    };
+
+    // Static translations map for UI elements
+    const uiTranslations = {
+        fa: {
+            consultBtn: "درخواست مشاوره", subtitleText: "Aerobiology & Air Monitoring",
+            navProducts: "محصولات", navServices: "خدمات", navDashboard: "پایش آنلاین", navNews: "اخبار", navFaq: "سوالات متداول", navContact: "تماس",
+            heroTitle: "سامانه هوشمند پایش <span class='text-gradient'>اسپور قارچ و آلرژن هوا</span>",
+            heroDesc: "طراحی و ساخت تجهیزات پیشرفته نمونه‌گیری گرده، اسپور قارچ، آلرژن‌های معلق و پایش کیفیت هوا برای بیمارستان‌ها، آزمایشگاه‌ها، مراکز تحقیقاتی و کشاورزی دقیق",
+            heroBtn1: "مشاهده محصولات", heroBtn2: "خدمات تخصصی",
+            statsTitle: "داده‌های پایش هوا", statsSub: "نمونه‌ای از داده‌های واقعی ثبت شده توسط سامانه",
+            stat1Label: "اسپور قارچ / متر مکعب", stat2Label: "گرده گیاهان", stat3Label: "دقت نمونه‌گیری %", stat4Label: "ساعت پایش پیوسته",
+            productsTitle: "محصولات تخصصی", productsSub: "طراحی شده بر اساس فناوری مشابه Burkard و Zefon با قابلیت بومی‌سازی",
+            servicesTitle: "خدمات تخصصی", servicesSub: "ارائه خدمات نمونه‌گیری، تحلیل و تفسیر داده‌های آلرژن و اسپور قارچ",
+            dashboardTitle: "داشبورد آنلاین پایش", dashboardDesc: "داده‌های ثبت شده توسط دستگاه‌ها به صورت آنلاین روی پلتفرم ابری ذخیره شده و امکان تحلیل، رسم نمودار، هشدار آلودگی و گزارش‌گیری فراهم است.",
+            dashboardFeature1: "ذخیره‌سازی ابری", dashboardFeature2: "تحلیل روند آلودگی", dashboardFeature3: "هشدار افزایش آلرژن",
+            newsTitle: "اخبار و رسانه", newsSub: "رویدادها و موفقیت‌های شرکت سورنا فناور سینا",
+            compareTitle: "مقایسه فنی", compareFeature: "ویژگی", compareOur: "سورنا فناور", compareRow1: "نمونه‌گیری", compareOur1: "۷ روزه + آنلاین", compareRow2: "تحلیل دیجیتال", compareOur2: "دارد", compareRow3: "Cloud Platform", compareOur3: "دارد", compareRow4: "خدمات تحلیل", compareOur4: "کامل",
+            faqTitle: "سوالات متداول", contactTitle: "تماس با ما", contactDesc: "برای مشاوره، ثبت سفارش یا همکاری با ما تماس بگیرید.", contactAddress: "اهواز، دانشگاه شهید چمران اهواز، مرکز رشد واحدهای فناور", contactNameLabel: "نام کامل", contactEmailLabel: "ایمیل", contactTypeLabel: "نوع درخواست", contactMsgLabel: "پیام", contactSubmitBtn: "ارسال درخواست", optPurchase: "خرید دستگاه", optSampling: "نمونه‌گیری هوا", optAnalysis: "تحلیل داده", optResearch: "همکاری پژوهشی", footerDesc: "توسعه فناوری‌های نوین پایش آلرژن، اسپور قارچ و آئروبیولوژی", copyright: "© 2026 سورنا فناور سینا - تمام حقوق محفوظ است"
+        },
+        en: {
+            consultBtn: "Request Consultation", subtitleText: "Aerobiology & Air Monitoring",
+            navProducts: "Products", navServices: "Services", navDashboard: "Live Monitoring", navNews: "News", navFaq: "FAQ", navContact: "Contact",
+            heroTitle: "Smart Airborne <span class='text-gradient'>Spore & Allergen Monitoring System</span>",
+            heroDesc: "Design and manufacturing of advanced pollen, fungal spore, airborne allergen samplers and air quality monitoring for hospitals, labs, research centers, and precision agriculture.",
+            heroBtn1: "View Products", heroBtn2: "Expert Services",
+            statsTitle: "Air Monitoring Data", statsSub: "Example of real data recorded by our system",
+            stat1Label: "Fungal Spores / m³", stat2Label: "Pollen Grains", stat3Label: "Sampling Accuracy %", stat4Label: "Continuous Hours",
+            productsTitle: "Specialized Products", productsSub: "Designed with technology similar to Burkard and Zefon, fully localized",
+            servicesTitle: "Expert Services", servicesSub: "Sampling, analysis and interpretation of allergen and fungal spore data",
+            dashboardTitle: "Live Monitoring Dashboard", dashboardDesc: "Data from devices is stored on cloud platform enabling analysis, trend charts, contamination alerts and reporting.",
+            dashboardFeature1: "Cloud Storage", dashboardFeature2: "Pollution Trend Analysis", dashboardFeature3: "Allergen Spike Alerts",
+            newsTitle: "News & Media", newsSub: "Events and achievements of Sorena Fanavar Sina",
+            compareTitle: "Technical Comparison", compareFeature: "Feature", compareOur: "Sorena Fanavar", compareRow1: "Sampling", compareOur1: "7-day + Online", compareRow2: "Digital Analysis", compareOur2: "Yes", compareRow3: "Cloud Platform", compareOur3: "Yes", compareRow4: "Analysis Services", compareOur4: "Complete",
+            faqTitle: "Frequently Asked Questions", contactTitle: "Contact Us", contactDesc: "Contact us for consultation, orders or collaboration.", contactAddress: "Ahvaz, Shahid Chamran University, Growth Center of Technology Units", contactNameLabel: "Full Name", contactEmailLabel: "Email", contactTypeLabel: "Request Type", contactMsgLabel: "Message", contactSubmitBtn: "Submit Request", optPurchase: "Purchase Device", optSampling: "Air Sampling", optAnalysis: "Data Analysis", optResearch: "Research Collaboration", footerDesc: "Developing advanced allergen, fungal spore monitoring and aerobiology technologies", copyright: "© 2026 Sorena Fanavar Sina - All rights reserved"
+        }
+    };
+
+    function applyUITranslations() {
+        const t = uiTranslations[currentLang];
+        document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if(t[key]) el.innerText = t[key]; });
+        document.getElementById('subtitleText').innerText = t.subtitleText;
+        document.getElementById('consultBtn').innerText = t.consultBtn;
+        document.getElementById('heroTitle').innerHTML = t.heroTitle;
+        document.getElementById('heroDesc').innerText = t.heroDesc;
+        document.querySelectorAll('[data-i18n="heroBtn1"]')[0].innerText = t.heroBtn1;
+        document.querySelectorAll('[data-i18n="heroBtn2"]')[0].innerText = t.heroBtn2;
+        document.getElementById('statsTitle').innerText = t.statsTitle;
+        document.getElementById('statsSub').innerText = t.statsSub;
+        document.getElementById('stat1Label').innerText = t.stat1Label;
+        document.getElementById('stat2Label').innerText = t.stat2Label;
+        document.getElementById('stat3Label').innerText = t.stat3Label;
+        document.getElementById('stat4Label').innerText = t.stat4Label;
+        document.getElementById('productsTitle').innerText = t.productsTitle;
+        document.getElementById('productsSub').innerText = t.productsSub;
+        document.getElementById('servicesTitle').innerText = t.servicesTitle;
+        document.getElementById('servicesSub').innerText = t.servicesSub;
+        document.getElementById('dashboardTitle').innerText = t.dashboardTitle;
+        document.getElementById('dashboardDesc').innerText = t.dashboardDesc;
+        document.getElementById('dashboardFeature1').innerText = t.dashboardFeature1;
+        document.getElementById('dashboardFeature2').innerText = t.dashboardFeature2;
+        document.getElementById('dashboardFeature3').innerText = t.dashboardFeature3;
+        document.getElementById('newsTitle').innerText = t.newsTitle;
+        document.getElementById('newsSub').innerText = t.newsSub;
+        document.getElementById('compareTitle').innerText = t.compareTitle;
+        document.getElementById('compareFeature').innerText = t.compareFeature;
+        document.getElementById('compareOur').innerText = t.compareOur;
+        document.getElementById('compareRow1').innerText = t.compareRow1;
+        document.getElementById('compareOur1').innerText = t.compareOur1;
+        document.getElementById('compareRow2').innerText = t.compareRow2;
+        document.getElementById('compareOur2').innerText = t.compareOur2;
+        document.getElementById('compareRow3').innerText = t.compareRow3;
+        document.getElementById('compareOur3').innerText = t.compareOur3;
+        document.getElementById('compareRow4').innerText = t.compareRow4;
+        document.getElementById('compareOur4').innerText = t.compareOur4;
+        document.getElementById('faqTitle').innerText = t.faqTitle;
+        document.getElementById('contactTitle').innerText = t.contactTitle;
+        document.getElementById('contactDesc').innerText = t.contactDesc;
+        document.getElementById('contactAddress').innerText = t.contactAddress;
+        document.getElementById('contactNameLabel').innerText = t.contactNameLabel;
+        document.getElementById('contactEmailLabel').innerText = t.contactEmailLabel;
+        document.getElementById('contactTypeLabel').innerText = t.contactTypeLabel;
+        document.getElementById('contactMsgLabel').innerText = t.contactMsgLabel;
+        document.getElementById('contactSubmitBtn').innerText = t.contactSubmitBtn;
+        document.getElementById('optPurchase').innerText = t.optPurchase;
+        document.getElementById('optSampling').innerText = t.optSampling;
+        document.getElementById('optAnalysis').innerText = t.optAnalysis;
+        document.getElementById('optResearch').innerText = t.optResearch;
+        document.getElementById('footerDesc').innerText = t.footerDesc;
+        document.getElementById('copyright').innerText = t.copyright;
+        // nav links
+        document.getElementById('navProducts').innerText = t.navProducts;
+        document.getElementById('navServices').innerText = t.navServices;
+        document.getElementById('navDashboard').innerText = t.navDashboard;
+        document.getElementById('navNews').innerText = t.navNews;
+        document.getElementById('navFaq').innerText = t.navFaq;
+        document.getElementById('navContact').innerText = t.navContact;
+    }
+
+    function renderProducts() {
+        const container = document.getElementById('productsContainer');
+        const products = productsData[currentLang];
+        container.innerHTML = products.map(p => `
+            <div class="bg-white rounded-2xl overflow-hidden shadow-xl card-hover">
+                <img src="${p.images[0]}" class="h-56 w-full object-cover" alt="${p.title}">
+                <div class="p-5">
+                    <h3 class="text-xl font-bold mb-2">${p.title}</h3>
+                    <p class="text-slate-600 mb-4">${p.description.substring(0, 100)}...</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-blue-700 text-lg">${p.price}</span>
+                        <button onclick="showProductDetail(${p.id})" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl">${currentLang === 'fa' ? 'جزئیات محصول' : 'Details'}</button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderServices() {
+        const container = document.getElementById('servicesList');
+        const services = servicesData[currentLang];
+        container.innerHTML = services.map(s => `
+            <div class="bg-white rounded-2xl p-6 shadow-lg text-center card-hover">
+                <i class="${s.icon} text-4xl text-blue-500 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">${s.title}</h3>
+                <p class="text-slate-600 mb-4">${s.desc}</p>
+                <button onclick="showServiceForm('${s.title}', '${s.type}')" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-xl">${currentLang === 'fa' ? 'درخواست خدمت' : 'Request Service'}</button>
+            </div>
+        `).join('');
+    }
+
+    function renderNews() {
+        const container = document.getElementById('newsContainer');
+        const news = newsData[currentLang];
+        container.innerHTML = news.map(n => `
+            <div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                <img src="${n.img}" class="h-48 w-full object-cover">
+                <div class="p-5">
+                    <div class="text-sm text-blue-600 mb-2">${n.badge}</div>
+                    <h3 class="text-xl font-bold mb-2">${n.title}</h3>
+                    <p class="text-slate-600 mb-4">${n.desc}</p>
+                    <a href="${n.link}" target="_blank" class="text-blue-600 font-semibold">${currentLang === 'fa' ? 'بیشتر بخوانید' : 'Read More'} <i class="fas fa-arrow-left"></i></a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderFAQ() {
+        const container = document.getElementById('faqContainer');
+        const faqs = faqData[currentLang];
+        container.innerHTML = faqs.map(f => `
+            <details class="bg-white rounded-2xl shadow p-6"><summary class="font-bold text-lg">${f.q}</summary><p class="mt-3 text-slate-600">${f.a}</p></details>
+        `).join('');
+    }
+
+    // Global functions for modals (using currentLang product detail)
+    window.showProductDetail = function(productId) {
+        const product = productsData[currentLang].find(p => p.id === productId);
+        if(!product) return;
+        const detailHtml = `
+            <div class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 overflow-y-auto" id="detailModal">
+                <div class="bg-white max-w-4xl w-full rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+                    <button onclick="closeModal()" class="absolute top-4 left-4 text-2xl text-gray-600 hover:text-black"><i class="fas fa-times"></i></button>
+                    <h2 class="text-2xl font-bold mb-4">${product.title}</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+                        ${product.images.map(img => `<img src="${img}" class="gallery-img" onclick="window.open(this.src)">`).join('')}
+                    </div>
+                    <p class="text-slate-700 mb-4">${product.description}</p>
+                    <ul class="mb-4 space-y-1">${product.features.map(f => `<li><i class="fas fa-check text-green-600"></i> ${f}</li>`).join('')}</ul>
+                    <div class="flex flex-wrap gap-4 mt-6 border-t pt-4">
+                        <span class="font-bold text-2xl text-blue-700">${product.price}</span>
+                        <button onclick="downloadCatalog('${product.title}')" class="bg-gray-700 text-white px-5 py-2 rounded-xl"><i class="fas fa-download"></i> ${currentLang === 'fa' ? 'دانلود کاتالوگ' : 'Download Catalog'}</button>
+                        <button onclick="showOrderForm(${product.id}, '${product.title}')" class="bg-blue-600 text-white px-6 py-2 rounded-xl"><i class="fas fa-shopping-cart"></i> ${currentLang === 'fa' ? 'سفارش محصول' : 'Order Product'}</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', detailHtml);
+    };
+    window.downloadCatalog = function(title) { alert(`${currentLang === 'fa' ? 'دانلود کاتالوگ محصول' : 'Download catalog for'} "${title}" ${currentLang === 'fa' ? 'شبیه‌سازی شد' : 'simulated'}.`); };
+    window.showOrderForm = function(prodId, prodTitle) {
+        const formHtml = `
+            <div class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4" id="orderModal">
+                <div class="bg-white max-w-md w-full rounded-2xl p-6">
+                    <h3 class="text-xl font-bold mb-3">${currentLang === 'fa' ? 'فرم سفارش محصول:' : 'Order Form:'} ${prodTitle}</h3>
+                    <form id="orderFormInner">
+                        <div class="mb-3"><input type="text" id="orderName" placeholder="${currentLang === 'fa' ? 'نام کامل' : 'Full Name'}" class="w-full p-2 border rounded-lg" required></div>
+                        <div class="mb-3"><input type="tel" id="orderPhone" placeholder="${currentLang === 'fa' ? 'شماره تماس' : 'Phone'}" class="w-full p-2 border rounded-lg" required></div>
+                        <div class="mb-3"><input type="email" id="orderEmail" placeholder="Email" class="w-full p-2 border rounded-lg" required></div>
+                        <div class="mb-3"><textarea id="orderMsg" rows="3" placeholder="${currentLang === 'fa' ? 'توضیحات سفارش' : 'Order details'}" class="w-full p-2 border rounded-lg"></textarea></div>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-xl">${currentLang === 'fa' ? 'ثبت سفارش' : 'Submit Order'}</button>
+                        <button type="button" onclick="closeModal()" class="w-full mt-2 text-gray-500 border border-gray-300 py-2 rounded-xl">${currentLang === 'fa' ? 'انصراف' : 'Cancel'}</button>
+                    </form>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', formHtml);
+        document.getElementById('orderFormInner')?.addEventListener('submit', (e) => { e.preventDefault(); alert(currentLang === 'fa' ? 'سفارش با موفقیت ثبت شد.' : 'Order submitted successfully.'); closeModal(); });
+    };
+    window.showServiceForm = function(serviceTitle, serviceType) {
+        const formHtml = `
+            <div class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4" id="serviceModal">
+                <div class="bg-white max-w-md w-full rounded-2xl p-6">
+                    <h3 class="text-xl font-bold mb-3">${currentLang === 'fa' ? 'درخواست خدمت:' : 'Service Request:'} ${serviceTitle}</h3>
+                    <form id="serviceFormInner">
+                        <div class="mb-3"><input type="text" id="servName" placeholder="${currentLang === 'fa' ? 'نام کامل' : 'Full Name'}" class="w-full p-2 border rounded-lg" required></div>
+                        <div class="mb-3"><input type="tel" id="servPhone" placeholder="${currentLang === 'fa' ? 'شماره تماس' : 'Phone'}" class="w-full p-2 border rounded-lg" required></div>
+                        <div class="mb-3"><input type="email" id="servEmail" placeholder="Email" class="w-full p-2 border rounded-lg" required></div>
+                        <div class="mb-3"><textarea id="servDesc" rows="3" placeholder="${currentLang === 'fa' ? 'توضیحات درخواست' : 'Request details'}" class="w-full p-2 border rounded-lg" required></textarea></div>
+                        <button type="submit" class="w-full bg-cyan-600 text-white py-2 rounded-xl">${currentLang === 'fa' ? 'ارسال درخواست' : 'Send Request'}</button>
+                        <button type="button" onclick="closeModal()" class="w-full mt-2 text-gray-500 border border-gray-300 py-2 rounded-xl">${currentLang === 'fa' ? 'انصراف' : 'Cancel'}</button>
+                    </form>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', formHtml);
+        document.getElementById('serviceFormInner')?.addEventListener('submit', (e) => { e.preventDefault(); alert(currentLang === 'fa' ? 'درخواست خدمت ثبت شد.' : 'Service request submitted.'); closeModal(); });
+    };
+    window.closeModal = function() { const modal = document.querySelector('.fixed.inset-0.bg-black\\/70'); if(modal) modal.remove(); };
+
+    function updateLanguage() {
+        applyUITranslations();
+        renderProducts();
+        renderServices();
+        renderNews();
+        renderFAQ();
+        // update direction
+        if(currentLang === 'en') document.documentElement.setAttribute('dir', 'ltr');
+        else document.documentElement.setAttribute('dir', 'rtl');
+        // active button style
+        document.getElementById('langFaBtn').classList.toggle('lang-active', currentLang === 'fa');
+        document.getElementById('langEnBtn').classList.toggle('lang-active', currentLang === 'en');
+    }
+
+    function initLangButtons() {
+        document.getElementById('langFaBtn').addEventListener('click', () => { currentLang = 'fa'; updateLanguage(); });
+        document.getElementById('langEnBtn').addEventListener('click', () => { currentLang = 'en'; updateLanguage(); });
+    }
+
+    function startCounters() {
+        const counters = document.querySelectorAll('.counter-number');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.getAttribute('data-target'));
+                    let current = 0;
+                    const increment = target / 50;
+                    const update = () => {
+                        current += increment;
+                        if(current < target) { el.innerText = Math.ceil(current); requestAnimationFrame(update); }
+                        else el.innerText = target;
+                    };
+                    update();
+                    observer.unobserve(el);
+                }
+            });
+        }, {threshold:0.5});
+        counters.forEach(c => observer.observe(c));
+    }
+
+    function initEventListeners() {
+        document.getElementById('consultBtn')?.addEventListener('click', () => document.getElementById('contact')?.scrollIntoView({behavior:'smooth'}));
+        document.getElementById('mobileMenuBtn')?.addEventListener('click', () => document.getElementById('mobileMenu')?.classList.toggle('hidden'));
+        document.getElementById('contactForm')?.addEventListener('submit', (e) => { e.preventDefault(); alert(currentLang === 'fa' ? 'درخواست شما ثبت شد. با تشکر' : 'Your request has been submitted. Thank you.'); e.target.reset(); });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); document.getElementById('mobileMenu')?.classList.add('hidden'); }
+            });
+        });
+    }
+
+    initLangButtons();
+    updateLanguage();
+    startCounters();
+    initEventListeners();
+</script>
+</body>
+</html>
